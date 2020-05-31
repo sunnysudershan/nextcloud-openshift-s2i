@@ -1,3 +1,21 @@
 #!/bin/bash -e
 
+NEXTCLOUD_VERSION=18.0.4
+
+curl -fsSL -o nextcloud.tar.bz2 "https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2";
+tar -xjf nextcloud.tar.bz2 -C ${HOME} --strip-components=1
+rm nextcloud.tar.bz2
+
+mkdir -p ${HOME}/data;
+mkdir ${HOME}/custom_apps
+
+chmod o-rwx ${HOME}/data;
+chmod +x ${HOME}/occ;
+
+# Cleaning up the git artifacts
+rm -fR ${HOME}/.git
+rm -fR ${HOME}/.idea
+rm -f ${HOME}/LICENSE
+rm -f ${HOME}/README.md
+
 source ${STI_SCRIPTS_PATH}/assemble
