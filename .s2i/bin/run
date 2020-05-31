@@ -1,3 +1,0 @@
-#!/bin/sh
-
-/entrypoint.sh /usr/local/bin/apache2-foreground
