@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+source ${STI_SCRIPTS_PATH}/assemble
+
 NEXTCLOUD_VERSION=18.0.4
 
 curl -fsSL -o nextcloud.tar.bz2 "https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2";
@@ -10,8 +12,6 @@ mkdir -p ${HOME}/data;
 mkdir ${HOME}/custom_apps
 
 chmod +x ${HOME}/occ;
-echo `ls -la`
-echo `ls -la ${HOME}/patches`
 patch -p1 < ${HOME}/patches/0000-dont-check-data-perms.txt
 
 # Cleaning up the git artifacts
@@ -19,5 +19,3 @@ rm -fR ${HOME}/.git
 rm -fR ${HOME}/.idea
 rm -f ${HOME}/LICENSE
 rm -f ${HOME}/README.md
-
-source ${STI_SCRIPTS_PATH}/assemble
