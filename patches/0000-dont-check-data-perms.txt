@@ -1,0 +1,17 @@
+diff --git a/lib/private/legacy/util.php b/lib/private/legacy/util.php
+index 9b574993f2..7216b44cac 100644
+--- a/lib/private/legacy/util.php
++++ b/lib/private/legacy/util.php
+@@ -1012,12 +1012,6 @@ class OC_Util {
+ 			chmod($dataDirectory, 0770);
+ 			clearstatcache();
+ 			$perms = substr(decoct(@fileperms($dataDirectory)), -3);
+-			if ($perms[2] !== '0') {
+-				$errors[] = [
+-					'error' => $l->t('Your data directory is readable by other users'),
+-					'hint' => $permissionsModHint
+-				];
+-			}
+ 		}
+ 		return $errors;
+ 	}

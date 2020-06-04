@@ -9,8 +9,10 @@ rm nextcloud.tar.bz2
 mkdir -p ${HOME}/data;
 mkdir ${HOME}/custom_apps
 
-chmod o-rwx ${HOME}/data;
 chmod +x ${HOME}/occ;
+echo `ls -la`
+echo `ls -la ${HOME}/patches`
+patch -p1 < ${HOME}/patches/0000-dont-check-data-perms.txt
 
 # Cleaning up the git artifacts
 rm -fR ${HOME}/.git
