@@ -1,6 +1,6 @@
 <?php
 $CONFIG = array(
-    'log_type' => 'syslog',
-    'logfile' => '',
-    'loglevel' => '2'
+    'log_type' => 'file',
+    'logfile' => '/opt/app-root/src/data/nextcloud.log',
+    'loglevel' => '4'
 );
