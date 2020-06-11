@@ -6,25 +6,4 @@ if [ ! -f ${HOME}/config/config.php ]; then
     touch ${HOME}/config/CAN_INSTALL
 fi
 
-if [ -n "${REDIS_HOST+x}" ]; then
-
-    echo "Configuring Redis as session handler"
-    {
-        SESSION_HANDLER=redis
-        # check if redis host is an unix socket path
-        if [ "$(echo "$REDIS_HOST" | cut -c1-1)" = "/" ]; then
-          if [ -n "${REDIS_HOST_PASSWORD+x}" ]; then
-            SESSION_PATH="\"unix://${REDIS_HOST}?auth=${REDIS_HOST_PASSWORD}\""
-          else
-            SESSION_PATH="\"unix://${REDIS_HOST}\""
-          fi
-        # check if redis password has been set
-        elif [ -n "${REDIS_HOST_PASSWORD+x}" ]; then
-            SESSION_PATH="\"tcp://${REDIS_HOST}:${REDIS_HOST_PORT:=6379}?auth=${REDIS_HOST_PASSWORD}\""
-        else
-            SESSION_PATH="\"tcp://${REDIS_HOST}:${REDIS_HOST_PORT:=6379}\""
-        fi
-    }
-fi
-
 source ${STI_SCRIPTS_PATH}/run
