@@ -1,0 +1,12 @@
+FROM registry.access.redhat.com/ubi8/php-73
+
+USER 0
+
+RUN set -ex; \
+    \
+    dnf -y update; \
+    dnf -y remove nodejs npm; \
+    dnf -y install php-pecl-zip; \
+    dnf -y clean all
+
+USER 1001
