@@ -2,6 +2,7 @@
 
 $autoconfig_enabled = false;
 
+
 if (getenv('SQLITE_DATABASE')) {
     $AUTOCONFIG["dbtype"] = "sqlite";
     $AUTOCONFIG["dbname"] = getenv('SQLITE_DATABASE');
@@ -28,4 +29,5 @@ if ($autoconfig_enabled) {
     }
 
     $AUTOCONFIG["directory"] = getenv('NEXTCLOUD_DATA_DIR') ?: "/opt/app-root/src/data";
+    $AUTOCONFIG['check_data_directory_permissions'] = false;
 }
