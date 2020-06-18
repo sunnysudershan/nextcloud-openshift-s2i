@@ -1,0 +1,37 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: nextcloud-openshift
+    app.kubernetes.io/component: nextcloud-openshift
+    app.kubernetes.io/instance: nextcloud-openshift
+  name: nextcloud-openshift-s2i
+  namespace: 
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'nextcloud-openshift-s2i:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: 'https://github.com/cuppett/nextcloud-openshift-s2i.git'
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: 'php-73:latest'
+        namespace: 
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+status:
+  lastVersion: 5

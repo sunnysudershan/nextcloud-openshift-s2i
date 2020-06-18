@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+  labels:
+    app: nextcloud-openshift
+  name: nextcloud-openshift-s2i
+  namespace:
+spec:
+  host:
+  port:
+    targetPort: 8080-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: nextcloud-openshift-s2i
+    weight: 100
+  wildcardPolicy: None

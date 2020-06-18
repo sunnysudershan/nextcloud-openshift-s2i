@@ -1,0 +1,110 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: nextcloud-openshift
+  name: nextcloud-openshift-s2i
+  namespace: 
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: nextcloud-openshift
+    deploymentconfig: nextcloud-openshift
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nextcloud-openshift
+        deploymentconfig: nextcloud-openshift
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_HOST
+              value: mysql
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: database-password
+                  name: mysql
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: database-name
+                  name: mysql
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: database-user
+                  name: mysql
+            - name: S3_HOSTNAME
+              value: 
+            - name: S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: 
+                  name: 
+            - name: S3_ACCESS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: 
+                  name: 
+            - name: S3_BUCKET
+              value: 
+            - name: S3_USE_PATH_STYLE
+              value: 'false'
+            - name: OVERWRITEPROTOCOL
+              value: https
+            - name: TRUSTED_PROXIES
+              value: << CIDR OF CLUSTER NETWORK >>
+            - name: PHP_MEMORY_LIMIT
+              value: 512M
+            - name: OPCACHE_REVALIDATE_FREQ
+              value: '1'
+          image:
+          imagePullPolicy: Always
+          name: nextcloud
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /opt/app-root/src/data
+              name: volume-36pfr
+              subPath: data19
+            - mountPath: /opt/app-root/src/config
+              name: volume-36pfr
+              subPath: config19
+            - mountPath: /opt/app-root/src/custom_apps
+              name: volume-36pfr
+              subPath: custom_apps19
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: 
+          persistentVolumeClaim:
+            claimName: 
+  test: false
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - nextcloud
+        from:
+          kind: ImageStreamTag
+          name: 'nextcloud-openshift-s2i:latest'
+          namespace: 
+        lastTriggeredImage: {}
+      type: ImageChange
+    - type: ConfigChange
+
