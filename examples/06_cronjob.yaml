@@ -1,0 +1,34 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: nextcron
+  namespace:
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - args:
+            - curl
+            - https://<< YOUR_NEXTCLOUD_ROUTE_URL >>/cron.php
+            image: registry.access.redhat.com/ubi8
+            imagePullPolicy: Always
+            name: cron
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/5 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
