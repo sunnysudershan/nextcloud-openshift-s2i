@@ -8,10 +8,15 @@ curl -fsSL -o nextcloud.tar.bz2 "https://download.nextcloud.com/server/releases/
 tar -xjf nextcloud.tar.bz2 -C ${HOME} --strip-components=1
 rm nextcloud.tar.bz2
 
-mkdir -p ${HOME}/data;
+fix-permissions ${HOME}/
+
+mkdir -p ${HOME}/data
 mkdir ${HOME}/custom_apps
 
-chmod +x ${HOME}/occ;
+chmod +x ${HOME}/occ
+
+mv autoconfig/* config/
+rmdir autoconfig
 
 # Cleaning up the git artifacts
 rm -fR ${HOME}/examples
