@@ -4,9 +4,24 @@ USER 0
 
 RUN set -ex; \
     \
-    dnf -y update; \
     dnf -y remove nodejs npm; \
-    dnf -y install php-pecl-zip; \
-    dnf -y clean all
+    dnf -y update; \
+    dnf -y install php-devel php-pecl-zip; \
+    dnf -y clean all; \
+    rm -rf /var/cache/dnf
+
+# Install redis for PHP session handling and common caching
+# https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
+RUN set -ex; \
+    cd /tmp; \
+    wget https://github.com/phpredis/phpredis/archive/5.3.1.tar.gz; \
+    tar -zxf 5.3.1.tar.gz; \
+    cd phpredis-5.3.1; \
+    phpize; \
+    ./configure; \
+    make && make install; \
+    cd ..; \
+    rm -fR 5.3.1.tar.gz phpredis-5.3.1; \
+    echo -e "; Enable redis extension module\nextension = redis.so" > /etc/php.d/40-redis.ini
 
 USER 1001
