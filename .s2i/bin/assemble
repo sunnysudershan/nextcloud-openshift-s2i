@@ -9,6 +9,7 @@ tar -xjf nextcloud.tar.bz2 -C ${HOME} --strip-components=1
 rm nextcloud.tar.bz2
 
 fix-permissions ${HOME}/
+fix-permissions /var/www/
 
 mkdir -p ${HOME}/data
 mkdir ${HOME}/custom_apps
