@@ -18,9 +18,3 @@ chmod +x ${HOME}/occ
 
 mv autoconfig/* config/
 rmdir autoconfig
-
-# Cleaning up the git artifacts
-rm -fR ${HOME}/examples
-rm -fR ${HOME}/.git
-rm -f ${HOME}/LICENSE
-rm -f ${HOME}/README.md

@@ -1,5 +1,10 @@
+/.s2i
+/.wget-hsts
 /config/
-/data/
 /custom_apps/
+/data/
+/httpd-cfg
+/php-post-assemble
 /themes/
+/upgrade.exclude
 /version.php
