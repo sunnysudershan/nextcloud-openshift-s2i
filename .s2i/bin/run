@@ -58,7 +58,7 @@ if version_greater "$image_version" "$installed_version"; then
         php /var/www/html/occ app:list | sed -n "/Enabled:/,/Disabled:/p" > /tmp/list_before
     fi
     if [ "$(id -u)" = 0 ]; then
-        rsync_options="-rlDog --chown www-data:root"
+        rsync_options="-rlDog --chown 1001:root"
     else
         rsync_options="-rlD"
     fi
@@ -69,7 +69,7 @@ if version_greater "$image_version" "$installed_version"; then
             rsync $rsync_options --include "/$dir/" --exclude '/*' /opt/app-root/src/ /var/www/html/
         fi
     done
-    rsync $rsync_options --include '/opt/app-root/src/version.php' --exclude '/*' /opt/app-root/src/ /var/www/html/
+    rsync $rsync_options --include 'version.php' --exclude '*' /opt/app-root/src/ /var/www/html/
     echo "Initializing finished"
 
     #install
