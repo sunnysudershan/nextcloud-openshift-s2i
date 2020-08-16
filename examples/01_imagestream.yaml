@@ -10,7 +10,7 @@ spec:
     - annotations: null
       from:
         kind: DockerImage
-        name: 'quay.io/cuppett/ubi8-php73-nextcloud:latest'
+        name: 'quay.io/cuppett/ubi8-php73:latest'
       importPolicy:
         scheduled: true
       name: latest
