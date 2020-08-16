@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/component: nextcloud-openshift
     app.kubernetes.io/instance: nextcloud-openshift
   name: nextcloud-openshift-s2i
-  namespace: 
+  namespace: nextcloud
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null
@@ -26,12 +26,11 @@ spec:
       from:
         kind: ImageStreamTag
         name: 'php-73:latest'
-        namespace: 
+        namespace: nextcloud
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
     - type: ConfigChange
     - imageChange: {}
       type: ImageChange
-status:
-  lastVersion: 5
+

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nextcloud-openshift
   name: nextcloud-openshift-s2i
-  namespace:
+  namespace: nextcloud
 spec:
   host:
   port:

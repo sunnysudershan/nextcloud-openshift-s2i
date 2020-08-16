@@ -23,5 +23,5 @@ if (getenv('SQLITE_DATABASE')) {
 }
 
 if ($autoconfig_enabled) {
-    $AUTOCONFIG["directory"] = getenv('NEXTCLOUD_DATA_DIR') ?: "/opt/app-root/src/data";
+    $AUTOCONFIG["directory"] = getenv('NEXTCLOUD_DATA_DIR') ?: "/var/www/html/data";
 }

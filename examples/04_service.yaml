@@ -4,9 +4,8 @@ metadata:
   labels:
     app: nextcloud-openshift
   name: nextcloud-openshift
-  namespace:
+  namespace: nextcloud
 spec:
-  clusterIP: 172.30.133.172
   ports:
     - name: 8080-tcp
       port: 8080
