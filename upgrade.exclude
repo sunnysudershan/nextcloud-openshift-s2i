@@ -1,4 +1,4 @@
-/.s2i
+/.s2i/
 /.wget-hsts
 /config/
 /custom_apps/
