@@ -12,7 +12,7 @@ if (getenv('S3_BUCKET')) {
             'port' => getenv('S3_PORT') ?: '',
             'autocreate' => getenv('S3_AUTOCREATE') ?: '',
             'use_ssl' => getenv('S3_USE_SSL') ?: '',
-            'use_path_style' => getenv('S3_USE_PATH_STYLE') === 'true' ?: false
+            'use_path_style' => getenv('S3_USE_PATH_STYLE') == true ?: false
          )
     )
   ];
