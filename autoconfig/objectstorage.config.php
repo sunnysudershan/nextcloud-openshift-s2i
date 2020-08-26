@@ -1,6 +1,7 @@
 <?php
 if (getenv('OBJECTSTORE_S3_BUCKET')) {
   $use_ssl = getenv('OBJECTSTORE_S3_SSL');
+  $use_path = getenv('OBJECTSTORE_S3_USEPATH_STYLE');
   $CONFIG = [
     'objectstore' => array(
         'class' => \OC\Files\ObjectStore\S3::class,
@@ -12,7 +13,7 @@ if (getenv('OBJECTSTORE_S3_BUCKET')) {
             'hostname' => getenv('OBJECTSTORE_S3_HOST') ?: '',
             'port' => getenv('OBJECTSTORE_S3_PORT') ?: '',
             'use_ssl' => $use_ssl != null && (strtolower($use_ssl) == 'false' || $use_ssl == false) ? false : true,
-            'use_path_style' => getenv('OBJECTSTORE_S3_USEPATH_STYLE') == true
+            'use_path_style' => $use_path == true && strtolower($use_path) != 'false'
          )
     )
   ];
