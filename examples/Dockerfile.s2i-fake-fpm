@@ -7,11 +7,7 @@ USER root
 
 # Copying in source code
 
-COPY .. /tmp/src
-
-# Change file ownership to the assemble user.
-
-RUN chown -R 1001:0 /tmp/src
+COPY --chown=1001:0 ./ /tmp/src
 
 # Run assemble as non-root user
 
