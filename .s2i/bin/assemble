@@ -2,7 +2,7 @@
 
 source ${STI_SCRIPTS_PATH}/assemble
 
-NEXTCLOUD_VERSION=19.0.3
+NEXTCLOUD_VERSION=20.0.1
 
 curl -fsSL -o nextcloud.tar.bz2 "https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2";
 tar -xjf nextcloud.tar.bz2 -C ${HOME} --strip-components=1
